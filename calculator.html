@@ -31,12 +31,17 @@
       font-size: 18px;
       margin: 5px;
     }
+
+    .btn-wide {
+      width: 106px;
+    }
   </style>
 </head>
 <body>
 
   <div id="calculator">
     <input type="text" id="display" disabled><br>
+
     <button class="btn" onclick="appendValue('1')">1</button>
     <button class="btn" onclick="appendValue('2')">2</button>
     <button class="btn" onclick="appendValue('3')">3</button>
@@ -53,9 +58,12 @@
     <button class="btn" onclick="appendValue('*')">*</button><br>
 
     <button class="btn" onclick="appendValue('0')">0</button>
-    <button class="btn" onclick="clearDisplay()">C</button>
+    <button class="btn" onclick="appendValue('.')">.</button>
     <button class="btn" onclick="calculate()">=</button>
-    <button class="btn" onclick="appendValue('/')">/</button>
+    <button class="btn" onclick="appendValue('/')">/</button><br>
+
+    <button class="btn btn-wide" onclick="clearDisplay()">C</button>
+    <button class="btn btn-wide" onclick="backspace()">⌫</button>
   </div>
 
   <script>
@@ -67,9 +75,15 @@
       document.getElementById('display').value = '';
     }
 
+    function backspace() {
+      let display = document.getElementById('display');
+      display.value = display.value.slice(0, -1);
+    }
+
     function calculate() {
       try {
-        document.getElementById('display').value = eval(document.getElementById('display').value);
+        let result = eval(document.getElementById('display').value);
+        document.getElementById('display').value = result;
       } catch (e) {
         document.getElementById('display').value = 'Error';
       }
