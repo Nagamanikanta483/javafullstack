@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <h2>Registration Form</h2>
+  <form id="registrationForm">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="phone">Phone Number:</label><br>
+    <input type="tel" id="phone" name="phone" required>
+    <div id="phoneError" class="error"></div><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required>
+    <div id="passwordError" class="error"></div><br>
+
+    <input type="submit" value="Register">
+  </form>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Clear previous error messages
+      document.getElementById("phoneError").textContent = "";
+      document.getElementById("passwordError").textContent = "";
+
+      let phone = document.getElementById("phone").value;
+      let password = document.getElementById("password").value;
+      let valid = true;
+
+      // Phone validation
+      if (!/^\d{10}$/.test(phone)) {
+        document.getElementById("phoneError").textContent = "Phone number must be exactly 10 digits.";
+        valid = false;
+      }
+
+      // Password validation
+      if (password.length < 6) {
+        document.getElementById("passwordError").textContent = "Password must be at least 6 characters.";
+        valid = false;
+      }
+
+      if (valid) {
+         window.location.href = "menu.html"; 
+      }
+    });
+  </script>
+</body>
+</html>
